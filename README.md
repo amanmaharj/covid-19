@@ -1,3 +1,5 @@
+![](img/screen-shot.png)
+
 # covid-19
 Gives you a data on covid-19 cases (Total covid cases,Deaths, Recovered) of all countries
 
