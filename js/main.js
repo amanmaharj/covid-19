@@ -1,4 +1,21 @@
 
+function listing(data){
+
+const list = document.createElement('li')
+
+list.textContent = data
+
+document.getElementById("detail").appendChild(list);
+
+
+}
+
+function clearUl(){
+   location.reload()
+}
+
+
+
 fetch("https://covid-193.p.rapidapi.com/statistics", {
 	"method": "GET",
 	"headers": {
@@ -53,17 +70,36 @@ document.getElementById('button1').addEventListener('click',function (){
 })
 
 .then((jsonData)=>{
-    console.log(jsonData)
+    
     for(i=0;i<jsonData.response.length;i++){
       if  (jsonData.response[i].country==document.querySelector('input').value) {
-            document.getElementById('detail').innerHTML = "";
-            document.getElementById('detail').innerHTML +="Country Name : " + ( jsonData.response[i].country +", Total covid Cases: "+ jsonData.response[i].cases.total + ", Total Death : "+ jsonData.response[i].deaths.total + ", Total Cases Recovered : "+jsonData.response[i].cases.recovered+"</br>")
+    
+        const x = document.createElement("button")
+        x.setAttribute('content','clear')
+        x.textContent = "clear";
+        document.querySelector('p').append(x)
+
+
+            listing("Country Name : " + jsonData.response[i].country )
+            listing("Total Cases : " + jsonData.response[i].cases.total)
+            listing("Total Recovered : " + jsonData.response[i].cases.recovered)
+            listing("Total Death : " + jsonData.response[i].deaths.total)
         
-        console.log(jsonData.response[i].cases.recovered)
+            document.querySelector('input').value = "";
+
+           
+
+            
+            
+
+
+        
        }
+       
      }
     
     })
+    
 })
 
 

@@ -1,3 +1,57 @@
+*{
+    box-sizing: border-box;
+    
+    color: inherit;
+}
+
 body{
     background-color: aliceblue;
+    font-family: 'Rokkitt', serif;
+    padding: 0;
+    margin: 0;
+}
+
+#container{
+    
+    padding: 24px;
+}
+
+table, th, td{
+   border: 1px solid black;  
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+th{
+    height: 50px; 
+}
+
+main{
+    display: flex;
+}
+
+.main--content{
+    flex: 2;
+}
+.main--img{
+    flex: 1;
+}
+
+header{
+    display: flex;
+    align-items: center;
+}
+
+nav{
+    flex-grow: 1;
+    text-align-last: right;
+}
+
+#button1{
+    margin-top: 5px;
+}
+
+input{
+    margin-top: 0;
 }
