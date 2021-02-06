@@ -22,3 +22,5 @@ General People could use this service to get the updates on the the latest covid
 
 # Wire Framework
 ![](img/fire-frame.png)
+
+https://amanmaharj.github.io/covid-19/
