@@ -1,3 +1,5 @@
+![](img/screen-shot.png)
+
 # covid-19
 Gives you a data on covid-19 cases (Total covid cases,Deaths, Recovered) of all countries
 
@@ -19,3 +21,6 @@ Heatlth worker, Goverment bodies could use this service to retrieve the informat
 General People could use this service to get the updates on the the latest covid-19 cases.
 
 # Wire Framework
+![](img/fire-frame.png)
+
+https://amanmaharj.github.io/covid-19/
