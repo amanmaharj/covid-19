@@ -1,4 +1,10 @@
 
+
+google.charts.load("current", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawChart);
+
+ 
+
 //Used to fetch the data from the api to display into the table format in the body
 fetch("https://covid-193.p.rapidapi.com/statistics", {
     "method": "GET",
@@ -17,7 +23,8 @@ fetch("https://covid-193.p.rapidapi.com/statistics", {
 
 
 //Used to fetch the data from the api to display in the body when user enter the country name from the search form.
-document.getElementById('button1').addEventListener('click', function () {
+document.getElementById('button1').addEventListener('click', function (x) {
+    x.preventDefault()
     fetch("https://covid-193.p.rapidapi.com/statistics", {
         "method": "GET",
         "headers": {
@@ -34,31 +41,36 @@ document.getElementById('button1').addEventListener('click', function () {
             for (i = 0; i < jsonData.response.length; i++) {
 
                 //checking whether the input data from the form is equall to the api data fetch from the response[i].country
-                if (jsonData.response[i].country == document.querySelector('input').value) {
+                if (jsonData.response[i].country.toLowerCase() == document.querySelector('input').value.toLowerCase()) {
+                    //displaying into pie chartf
+                    drawChart(jsonData.response[i].country, jsonData.response[i].cases.total, jsonData.response[i].cases.recovered, jsonData.response[i].deaths.total)
 
-
+                   
+                    
                     listing("Country Name : " + jsonData.response[i].country)
                     listing("Total Cases : " + jsonData.response[i].cases.total)
                     listing("Total Recovered : " + jsonData.response[i].cases.recovered)
                     listing("Total Death : " + jsonData.response[i].deaths.total)
-
+                    
+                    listing("*************************")
+                  
                     document.querySelector('input').value = "";
 
                     //to make sure the clear button is created only when we have child nodes 4
-                    if (document.getElementById('detail').childNodes.length === 4) {
+                    if (document.getElementById('detail').childNodes.length === 5) {
 
                         const x = document.createElement("button")
 
                         x.setAttribute('content', 'clear')
                         x.textContent = "clear";
-                        document.querySelector('p').appendChild(x)
+                        document.querySelector('#burr').appendChild(x)
 
                         //to clear the itmems from the ul that user has search from the search form.
                         x.addEventListener('click', () => {
                             location.reload();
                         })
 
-                    }
+                     }
 
                 }
 
@@ -106,5 +118,37 @@ function displayData(jsonData) {
 
     }
 }
+
+//show the pie chart to the page.
+    function drawChart(countryName,countryCases,countryRecovered,countryDeath) {
+        var data = google.visualization.arrayToDataTable([
+          ['Cases', 'People Number'],
+          ['Total cases',   countryCases],
+          ['Total recovered',    countryRecovered],
+          ['Total death',  countryDeath]
+        ]);
+    
+        var options = {
+          title: countryName,
+          is3D: true,
+        };
+    
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        
+        if(options){
+        chart.draw(data, options);
+        }else{
+            document.getElementById('piechart_3d').innerHTML = none;  
+        }
+      }
+
+
+
+
+
+
+
+
+
 
 
